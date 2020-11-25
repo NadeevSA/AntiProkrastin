@@ -1,0 +1,16 @@
+{
+  "name": "АнтиПрокрастин",
+  "version": "1.1",
+  "permissions": ["webRequest", "webRequestBlocking", "tabs", "<all_urls>"],
+  "background": {
+    "scripts": ["site.js", "background.js", "blocks.js"],
+	"persistent": true
+  },
+  "browser_action": {
+      "default_popup": "main.html",
+      "default_icon": "icon.png"
+   },
+  "icons": {"128": "icon128.png"},
+  "description": "Разработано студентами 3 курса ПРО, УГАТУ. (2020г.)",
+  "manifest_version": 2
+}
