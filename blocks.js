@@ -1,13 +1,23 @@
-let url
-chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-    url = tabs[0].url;
-	sites.push(url);
-	
-    // use `url` here inside the callback because it's asynchronous!
-});
-sites.push("asda");
-for (var i=0; i< sites.length; i++) {
-  var element = sites[i];
-  
-    document.body.innerHTML += '<p><big><big>' + element + '</big></big></p>'
+
+var a = document.getElementById("myButton");
+a.addEventListener("click", add);
+sites.forEach(
+    htmlAdd
+);
+function htmlAdd(value) {
+    var node = document.createElement("LI");
+    var textnode = document.createTextNode(value);
+    node.appendChild(textnode);
+    document.getElementById("myList").appendChild(node);
 }
+
+
+function add() {
+    var doc = document.getElementById("name");
+
+        var site = doc.value;
+        sites.push("*://"+site+"/!*");
+        console.log(sites);
+        htmlAdd(site)
+}
+
