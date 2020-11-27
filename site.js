@@ -1,4 +1,4 @@
 var sites = [
-/*"*://www.youtube.com/!*"*/
+//"*://www.youtube.com/*"
 ];
 
