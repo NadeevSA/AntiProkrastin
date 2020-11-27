@@ -1,7 +1,7 @@
 {
   "name": "АнтиПрокрастин",
   "version": "1.1",
-  "permissions": ["webRequest", "webRequestBlocking", "tabs", "storage", "management", "<all_urls>"],
+  "permissions": ["webRequest", "webRequestBlocking", "tabs", "storage", "management", "notifications", "<all_urls>"],
   "background": {
     "scripts": ["blocks.js", "background.js"],
 	"persistent": true

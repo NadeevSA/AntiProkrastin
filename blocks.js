@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function(){
 	}
 });
 
+getUserPrefs();
+
 function getUserPrefs() {
     // с помощью этой функции можно извлечь данные
     // объект obj.key явлется массивом который сохраняет google
@@ -62,6 +64,7 @@ function blocks(value){
 		{urls: [value]},
 		["blocking"],
 	)
+	showNotification();
 }
 
 function clearHtmlList() {
@@ -87,3 +90,11 @@ function add() {
 	blocks("*://"+site+"/*");	
 }
 
+function showNotification () {
+	chrome.notifications.create('reminder', {
+        type: 'basic',
+        iconUrl: 'icon128.png',
+        title: 'Иди работай!',
+        message: 'Опять пошёл развлекаться?! Ну уж нет!'
+     }, function(notificationId) {});
+}

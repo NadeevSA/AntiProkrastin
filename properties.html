@@ -10,7 +10,7 @@
     #rectangle
     {
         width: 100%;
-        height: 40%;
+        height: 80%;
         background: -moz-linear-gradient(#FF0000, #FFFFFF);
         background: -webkit-gradient(linear, 0 0, 0 100%, from(#FF0000), to(#FFFFFF));
     }
@@ -25,16 +25,36 @@
         margin: 0;
     }
     button.new {
-        background: -moz-linear-gradient(#808080, #EBFFFF);
-        background: -webkit-gradient(linear, 0 0, 0 100%, from(#808080), to(#EBFFFF));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#808080', endColorstr='#EBFFFF');
-        padding: 10px 20px;
+        background: -moz-linear-gradient(#ff9a03, #EBFFFF);
+        background: -webkit-gradient(linear, 0 0, 0 100%, from(#ff9a03), to(#EBFFFF));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9a03', endColorstr='#EBFFFF');
+        padding: 5px 20px;
         color: #333;
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         border-radius: 50px;
         border: 3px solid #666;
     }
+	li {
+		font-size: 20px;
+		font-family: Comic Sans MS, serif, times new roman;
+	}
+	input[type="text"] {
+		border: 3px solid black;
+		border-radius: 400px;
+		font-size: 14px; // Размер шрифта
+		font-family: Comic Sans MS; // Стиль шрифта
+	}
+	input[type="number"] {
+		border: 3px solid black;
+		border-radius: 400px;
+		font-size: 14px; // Размер шрифта
+		font-family: Comic Sans MS; // Стиль шрифта
+	}
+	button[type="submit"]{
+		font-family: Comic Sans MS, serif, times new roman;
+		font-size:13x;
+	}
 </style>
 
 </head>
@@ -42,11 +62,18 @@
 
 <body>
 <div id="rectangle">
-    <input type="text" id="name" name="name" placeholder="Название сайта"/>
-    <button type="submit" name ="myButton" id="myButton">Ok</button>
+    <input type="text" id="name" name="name" placeholder="Название сайта" />
+    <button type="submit" name ="myButton" id="myButton" class="new">Добавить</button>
 	<input type="number" id="nameInd" name="nameInd" placeholder="Номер индекса"/>
-    <button type="submit" name ="BtnDelete" id="BtnDelete">Ok</button>
-    <ol id="myList"></ol>
+    <button type="submit" name ="BtnDelete" id="BtnDelete" class="new">Удалить</button>
+		<form action="main.html">
+				<p>
+					<button type="submit" class="new">Назад</button>
+				</p>
+		</form>
+    <ol id="myList">
+	
+	</ol>
 </div>
 <script src="blocks.js"></script>
 </body>
