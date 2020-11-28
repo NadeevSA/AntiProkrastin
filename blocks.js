@@ -11,7 +11,12 @@ document.addEventListener("DOMContentLoaded", function(){
 		a.addEventListener("click", deleteFromStorage, false);
 	}
 });
-
+document.addEventListener("DOMContentLoaded", function(){
+    var a = document.getElementById("BtnRestart");
+    if(a){
+        a.addEventListener("click", blocksAllInMemory, false);
+    }
+});
 getUserPrefs();
 
 function getUserPrefs() {
@@ -24,13 +29,26 @@ function getUserPrefs() {
             chrome.storage.sync.set({key: ins}, function() {});
             return
         }
-		obj.key.forEach(
-            blocks
-        )
+        console.log(obj.key);
+        blocks(obj.key);
 		obj.key.forEach(
             htmlAdd
         )
     });
+}
+function blocksAllInMemory() {
+    chrome.runtime.reload()
+}
+function blocks(value){
+    if (value && value.length>0) {
+        chrome.webRequest.onBeforeRequest.addListener(
+            function (details) {
+                return {cancel: true};
+            },
+            {urls: value},
+            ["blocking"],
+        );
+    }
 }
 
 function saveToStorage(value) {
@@ -38,6 +56,7 @@ function saveToStorage(value) {
         obj.key.push(value);
         var ins=obj.key;
         chrome.storage.sync.set({key: ins}, function() {});
+        console.log(obj.key);
         clearHtmlList();
         obj.key.forEach(
             htmlAdd
@@ -48,24 +67,21 @@ function saveToStorage(value) {
 function deleteFromStorage() {
 	var num = document.getElementById("nameInd");
     chrome.storage.sync.get("key", function (obj) {
-        obj.key.splice(num.value - 1,1);
+        obj.key.splice(num.value - 1, 1);
         var ins=obj.key;
         chrome.storage.sync.set({key: ins}, function() {});
         clearHtmlList();
+        console.log(obj.key);
         obj.key.forEach(
             htmlAdd
         )
     });
 }
 
-function blocks(value){
-	chrome.webRequest.onBeforeRequest.addListener(
-		function(details) { return {cancel: true}; },
-		{urls: [value]},
-		["blocking"],
-	)
-	showNotification();
-}
+
+
+
+
 
 function clearHtmlList() {
     var myNode=document.getElementById("myList");
@@ -87,14 +103,13 @@ function add() {
     var doc = document.getElementById("name");
     var site = doc.value;
     saveToStorage("*://"+site+"/*");
-	blocks("*://"+site+"/*");	
 }
 
-function showNotification () {
+/*function showNotification () {
 	chrome.notifications.create('reminder', {
         type: 'basic',
         iconUrl: 'icon128.png',
         title: 'Иди работай!',
         message: 'Опять пошёл развлекаться?! Ну уж нет!'
      }, function(notificationId) {});
-}
+}*/
