@@ -11,18 +11,17 @@ document.addEventListener("DOMContentLoaded", function(){
 		a.addEventListener("click", deleteFromStorage, false);
 	}
 });
+
 document.addEventListener("DOMContentLoaded", function(){
     var a = document.getElementById("BtnRestart");
     if(a){
         a.addEventListener("click", blocksAllInMemory, false);
     }
 });
+
 getUserPrefs();
 
 function getUserPrefs() {
-    // с помощью этой функции можно извлечь данные
-    // объект obj.key явлется массивом который сохраняет google
-   /* chrome.storage.sync.get("key", function (obj) {});*/
     chrome.storage.sync.get("key", function (obj) {
         if (obj.key===undefined || obj.key==null){
             var ins=[];
@@ -30,22 +29,35 @@ function getUserPrefs() {
             return
         }
         console.log(obj.key);
-        blocks(obj.key);
+		blocks(obj.key);
 		obj.key.forEach(
             htmlAdd
         )
     });
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+    var c = document.getElementById('OnOff');
+	if(c){
+		c.onclick = function() {
+			getUserPrefs();
+		}
+	}
+});
+
+
 function blocksAllInMemory() {
-    chrome.runtime.reload()
+    chrome.runtime.reload();
 }
+
+		
 function blocks(value){
     if (value && value.length>0) {
         chrome.webRequest.onBeforeRequest.addListener(
             function (details) {
                 return {cancel: true};
             },
-            {urls: value},
+			{urls: value},
             ["blocking"],
         );
     }
@@ -78,11 +90,6 @@ function deleteFromStorage() {
     });
 }
 
-
-
-
-
-
 function clearHtmlList() {
     var myNode=document.getElementById("myList");
     while (myNode.firstChild) {
@@ -102,14 +109,7 @@ function htmlAdd(value) {
 function add() {
     var doc = document.getElementById("name");
     var site = doc.value;
-    saveToStorage("*://"+site+"/*");
+	if(site != "")
+		saveToStorage("*://"+site+"/*");
 }
 
-/*function showNotification () {
-	chrome.notifications.create('reminder', {
-        type: 'basic',
-        iconUrl: 'icon128.png',
-        title: 'Иди работай!',
-        message: 'Опять пошёл развлекаться?! Ну уж нет!'
-     }, function(notificationId) {});
-}*/
